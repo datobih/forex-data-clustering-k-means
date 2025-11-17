@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Data
+data/raw/*.pkl
+data/processed/*.pkl
+data/features/*.pkl
+*.csv
+*.h5
+
+# Results
+results/patterns/*.pkl
+results/backtests/*.pkl
+
+# Logs
+logs/*.log
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db

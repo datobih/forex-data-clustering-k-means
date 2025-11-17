@@ -1,0 +1,121 @@
+# Configuration for Algorithmic Pattern Discovery System
+
+# Data Sources
+data:
+  pairs:
+    - GC=F
+  frequency: 1m
+  start_date: ''
+  end_date: ''
+
+# Feature Engineering  
+features:
+  price:
+    - velocity
+    - acceleration
+    - distance_from_vwap
+    - distance_from_round_numbers
+    - fractals
+  volume:
+    - volume_delta
+    - volume_price_divergence
+    - absorption_ratio
+    - volume_weighted_momentum
+  microstructure:
+    - bid_ask_spread
+    - order_imbalance
+    - trade_intensity
+    - price_impact
+  temporal:
+    - hour_of_day
+    - day_of_week
+    - session_indicator
+    - time_since_high_low
+  cross_asset:
+    - correlation_deviations
+    - spread_divergence
+    - relative_strength
+
+# Unsupervised Learning Models
+models:
+  kmeans:
+    n_clusters: 8
+    n_init: 50
+    max_iter: 500
+  dbscan:
+    eps: 0.5
+    min_samples: 10
+  pca:
+    n_components: 0.95
+  autoencoder:
+    encoding_dim: 32
+    hidden_layers: [128, 64, 32]
+    epochs: 100
+    batch_size: 256
+    activation: relu
+  hmm:
+    n_states: 5
+    n_iter: 100
+    covariance_type: diag
+
+# Pattern Detection
+patterns:
+  liquidity_sweep:
+    lookback_periods: 50
+    threshold_std: 2.0
+    min_volume_spike: 1.5
+  absorption:
+    volume_threshold: 2.0
+    price_movement_threshold: 0.5
+  vwap_reversion:
+    distance_threshold: 1.5
+    reversion_window: 10
+  momentum_exhaustion:
+    rsi_overbought: 70
+    rsi_oversold: 30
+    divergence_lookback: 20
+
+# Backtesting
+backtest:
+  regimes:
+    bull_market:
+      start: 2019-01-01
+      end: 2020-02-01
+    covid_crash:
+      start: 2020-02-01
+      end: 2020-06-01
+    recovery:
+      start: 2020-06-01
+      end: 2021-12-31
+    high_volatility:
+      start: 2022-01-01
+      end: 2023-06-30
+    recent:
+      start: 2023-07-01
+      end: 2024-12-31
+  metrics:
+    - sharpe_ratio
+    - sortino_ratio
+    - max_drawdown
+    - win_rate
+    - profit_factor
+    - expectancy
+  min_occurrences: 30
+  min_win_rate: 0.55
+  min_profit_factor: 1.5
+
+# Execution
+execution:
+  risk_per_trade: 0.01
+  max_positions: 3
+  entry_threshold: 0.75
+  stop_loss_atr_multiple: 2.0
+  take_profit_atr_multiple: 3.0
+  min_pattern_strength: 0.7
+  max_correlation_threshold: 0.7
+
+# Logging
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: logs/trading_system.log
